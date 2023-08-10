@@ -1,13 +1,20 @@
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import useAuthState from '../../hooks/useAuthState'
+import {
+  type CalendarFormLogin,
+  type CalendarFormRegister,
+} from '../../../types.d'
 
 export default function useForms() {
-  const initialValuesLogin = {
+  const { loginUser, registerUser } = useAuthState()
+
+  const initialValuesLogin: CalendarFormLogin = {
     emailLogin: '',
     passwordLogin: '',
   }
 
-  const initialValuesRegister = {
+  const initialValuesRegister: CalendarFormRegister = {
     nameRegister: '',
     emailRegister: '',
     passwordRegister: '',
@@ -35,12 +42,12 @@ export default function useForms() {
       .required('Campo requerido'),
   })
 
-  const handleSubmitLogin = (values: typeof initialValuesLogin) => {
-    console.log({ login: values })
+  const handleSubmitLogin = (values: CalendarFormLogin) => {
+    loginUser(values)
   }
 
-  const handleSubmitRegister = (values: typeof initialValuesRegister) => {
-    console.log({ register: values })
+  const handleSubmitRegister = (values: CalendarFormRegister) => {
+    registerUser(values)
   }
 
   const formikLogin = useFormik({

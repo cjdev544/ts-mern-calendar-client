@@ -16,13 +16,19 @@ export default function CalendarView() {
     handleView,
   } = useCalendarView()
 
+  const eventsDate = events.map((event) => ({
+    ...event,
+    start: new Date(event.start),
+    end: new Date(event.end),
+  }))
+
   return (
     <>
       <Calendar
         culture='es'
         defaultView={lastView}
         localizer={localizer}
-        events={events}
+        events={eventsDate}
         startAccessor='start'
         endAccessor='end'
         style={{ height: 'calc(100vh - 80px)' }}

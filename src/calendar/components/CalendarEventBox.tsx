@@ -1,5 +1,5 @@
 import { EventProps } from 'react-big-calendar'
-import { EventCalendar } from '../../../types'
+import { type EventCalendar } from '../../../types.d'
 
 type Props = EventProps<EventCalendar>
 

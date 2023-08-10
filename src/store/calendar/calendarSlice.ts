@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { type EventCalendar } from '../../../types.d'
 import { addHours } from 'date-fns'
+import { type EventCalendar } from '../../../types.d'
 
 const events: EventCalendar[] = [
   {
     id: '1',
     title: 'Cumpleaños de Javier',
     notes: 'Comprar el pastel',
-    start: new Date().getTime(),
-    end: addHours(new Date(), 2).getTime(),
+    start: new Date(),
+    end: addHours(new Date(), 2),
     bgColor: '#fafafa',
     user: { uid: '123', name: 'Jefferson' },
   },

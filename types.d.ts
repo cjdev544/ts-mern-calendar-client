@@ -30,8 +30,30 @@ export interface EventCalendar {
   id: string | null
   title: string
   notes: string
-  start: number
-  end: number
+  start: Date
+  end: Date
   bgColor: string
   user: User
+}
+
+export interface EventCalendarSlice {
+  id: string | null
+  title: string
+  notes: string
+  start: Date
+  end: Date
+  bgColor: string
+  user: User
+}
+
+export interface CalendarFormLogin {
+  emailLogin: string
+  passwordLogin: string
+}
+
+export interface CalendarFormRegister {
+  nameRegister: string
+  emailRegister: string
+  passwordRegister: string
+  repeatPasswordRegister: string
 }

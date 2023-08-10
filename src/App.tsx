@@ -1,15 +1,14 @@
 import Router from './router/Router'
-import { AuthStatus } from '../types.d'
-import { Provider } from 'react-redux'
-import { store } from './store/store'
+import useAuthState from './hooks/useAuthState'
 import 'sweetalert2/dist/sweetalert2.min.css'
+import { useEffect } from 'react'
 
 export default function App() {
-  const authStatus = AuthStatus.NOT_AUTHENTICATED
+  const { auth, checkingAuth } = useAuthState()
 
-  return (
-    <Provider store={store}>
-      <Router isAuth={authStatus} />
-    </Provider>
-  )
+  useEffect(() => {
+    checkingAuth()
+  }, [])
+
+  return <Router isAuth={auth.status} />
 }
