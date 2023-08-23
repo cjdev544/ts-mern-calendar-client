@@ -5,6 +5,7 @@ import esES from 'date-fns/locale/es'
 
 import useUiState from '../../hooks/useUiState'
 import useCalendarState from '../../hooks/useCalendarState'
+import useAuthState from '../../hooks/useAuthState'
 import { StorageSave, type EventCalendar } from '../../../types.d'
 
 const locales = {
@@ -35,23 +36,26 @@ const messages = {
   showMore: (total: unknown) => `+ Ver más (${total})`,
 }
 
-const eventStyleGetter = () => {
-  const style = {
-    backgroundColor: '#347CF7',
-    borderRadius: '0',
-    color: 'white',
-    opacity: 0.8,
-  }
-  return { style }
-}
-
 export default function useCalendarView() {
   const [lastView, setLastView] = useState<View>(
     (localStorage.getItem(StorageSave.LAST_VIEW) as View) || 'week'
   )
+  const { auth } = useAuthState()
 
   const { openDateModal } = useUiState()
   const { events, selectedEvent } = useCalendarState()
+
+  const eventStyleGetter = (event: EventCalendar) => {
+    const authUserEvent = auth.user?.uid === event.user.uid
+
+    const style = {
+      backgroundColor: authUserEvent ? '#347CF7' : '#465660',
+      borderRadius: '0',
+      color: 'white',
+      opacity: 0.8,
+    }
+    return { style }
+  }
 
   const handleSelectEvent = (event: EventCalendar) => {
     selectedEvent(event)

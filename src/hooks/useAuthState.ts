@@ -1,12 +1,14 @@
+import Swal from 'sweetalert2'
+
+import { useAppDispatch, useAppSelector } from '../store/redux-hooks'
 import {
   onCheckAuthUser,
   onLoginUser,
   onLogoutUser,
 } from '../store/auth/authSlice'
-import { useAppDispatch, useAppSelector } from '../store/redux-hooks'
 import { RootState } from '../store/store'
 import fetchData from '../helpers/fetchData'
-import Swal from 'sweetalert2'
+import { cleanEvents } from '../store/calendar/calendarSlice'
 import {
   StorageSave,
   type CalendarFormLogin,
@@ -85,12 +87,12 @@ export default function useAuthState() {
         timer: 2500,
       })
     }
-
     localStorage.setItem(StorageSave.TOKEN, res.user.token)
     dispatch(onLoginUser({ name: res.user.name, uid: res.user.uid }))
   }
 
   const logoutUser = () => {
+    dispatch(cleanEvents())
     dispatch(onLogoutUser())
     localStorage.removeItem(StorageSave.TOKEN)
   }

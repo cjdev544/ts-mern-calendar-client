@@ -30,8 +30,8 @@ export interface EventCalendar {
   id: string | null
   title: string
   notes: string
-  start: Date
-  end: Date
+  start: Date | number
+  end: Date | number
   bgColor: string
   user: User
 }
@@ -40,8 +40,8 @@ export interface EventCalendarSlice {
   id: string | null
   title: string
   notes: string
-  start: Date
-  end: Date
+  start: Date | number
+  end: Date | number
   bgColor: string
   user: User
 }
@@ -56,4 +56,16 @@ export interface CalendarFormRegister {
   emailRegister: string
   passwordRegister: string
   repeatPasswordRegister: string
+}
+
+// States
+export interface AuthState {
+  status: AuthStatus
+  user: User | null
+  errorMessage: string | null
+}
+
+export interface EventState {
+  events: EventCalendar[]
+  activeEvent: EventCalendar | null
 }

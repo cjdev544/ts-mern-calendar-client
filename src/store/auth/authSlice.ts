@@ -1,13 +1,7 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { AuthStatus, type User } from '../../../types.d'
+import { type AuthState, AuthStatus, type User } from '../../../types.d'
 
-interface State {
-  status: AuthStatus
-  user: User | null
-  errorMessage: string | null
-}
-
-const initialState: State = {
+const initialState: AuthState = {
   status: AuthStatus.CHECKING,
   user: null,
   errorMessage: null,
